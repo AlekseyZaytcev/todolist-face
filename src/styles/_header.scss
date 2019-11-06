@@ -1,0 +1,17 @@
+.header__background_color {
+  background-color: $color-primary;
+}
+
+.header__content_wrapper {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 10px;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.header__content {
+  width: 80%;
+  padding-left: 4rem;
+}
