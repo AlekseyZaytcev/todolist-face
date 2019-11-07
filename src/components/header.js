@@ -14,6 +14,10 @@ const Header = ({ siteTitle }) => (
             {siteTitle}
           </Link>
         </h1>
+        <div className="header__control_buttons">
+          <a variant="dark" className="btn btn-secondary header__btn" href="/sign_in">Sign In</a>
+          <a variant="dark" className="btn btn-secondary header__btn" href="/sign_up">Sign Up</a>
+        </div>
       </div>
     </div>
   </header>
