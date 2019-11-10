@@ -1,10 +1,11 @@
+import { navigate } from "gatsby"
 import React from "react"
 import { Form, Button } from "react-bootstrap"
 
 class LoginForm extends React.Component {
   constructor(props) {
     super(props)
-
+    this.state = { isInvalid: false }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -20,9 +21,20 @@ class LoginForm extends React.Component {
         "Content-Type": "application/json",
       },
     })
-      .then(response =>
+      .then(response => {
         this.props.setAuthToken(response.headers.get("Authorization"))
-      )
+
+        switch (response.status) {
+          case 201:
+            navigate("/")
+            break
+          case 401:
+            this.setState(state => {
+              return { ...state, isInvalid: true }
+            })
+            break
+        }
+      })
       .catch(error => console.log(error))
   }
 
@@ -30,17 +42,30 @@ class LoginForm extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <h3 className="form__element">Sign In</h3>
-        <Form.Group>
-          <Form.Control size="lg" name="username" placeholder="User Name" />
+        {this.state.isInvalid && (
+          <span className="form__error_message">
+            &#9888; Incorect login or(and) password
+          </span>
+        )}
+        <Form.Group className="form__element">
+          <Form.Control
+            isInvalid={this.state.isInvalid}
+            size="lg"
+            name="username"
+            placeholder="User Name"
+          />
+          <Form.Control.Feedback type="invalid" />
         </Form.Group>
 
         <Form.Group>
           <Form.Control
+            isInvalid={this.state.isInvalid}
             size="lg"
             name="password"
             type="password"
             placeholder="Password"
           />
+          <Form.Control.Feedback type="invalid" />
         </Form.Group>
 
         <Button

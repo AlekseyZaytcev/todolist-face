@@ -10,3 +10,8 @@
   margin-top: 0.8em;
   margin-bottom: 0.8em;
 }
+
+.form__error_message {
+  color: $color-errors;
+  font-size: 1.1em;
+}
