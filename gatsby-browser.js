@@ -6,3 +6,5 @@
 
 // You can delete this file if you're not using it
 import "./src/styles/style.scss"
+
+export { default as wrapRootElement } from "./src/store/RootWrapper"

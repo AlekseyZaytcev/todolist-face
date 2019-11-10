@@ -2,6 +2,12 @@ import React from "react"
 import { Form, Button } from "react-bootstrap"
 
 class LoginForm extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
   handleSubmit(e) {
     e.preventDefault()
     const data = new FormData(e.target)
@@ -14,7 +20,9 @@ class LoginForm extends React.Component {
         "Content-Type": "application/json",
       },
     })
-      .then(response => console.log(response))
+      .then(response =>
+        this.props.setAuthToken(response.headers.get("Authorization"))
+      )
       .catch(error => console.log(error))
   }
 

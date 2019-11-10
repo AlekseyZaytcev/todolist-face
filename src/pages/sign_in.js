@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import LoginForm from "../components/login/Form"
+import LoginContainer from "../components/login/LoginContainer"
 
 class SignInPage extends React.Component {
   render() {
@@ -12,7 +12,7 @@ class SignInPage extends React.Component {
         <SEO title="SignIn" keywords={[`gatsby`, `react`, `bootstrap`]} />
 
         <div className="form_wrapper">
-          <LoginForm />
+          <LoginContainer />
           <span>
             Don't have an account? <Link to="/sign_up">Sign Up</Link>
           </span>
