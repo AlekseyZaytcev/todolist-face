@@ -11,6 +11,7 @@ import { StaticQuery, graphql } from "gatsby"
 import { Container, Row, Col } from "react-bootstrap"
 
 import Header from "./header"
+import Message from "./message"
 
 const Layout = ({ children, pageInfo }) => (
   <StaticQuery
@@ -34,6 +35,7 @@ const Layout = ({ children, pageInfo }) => (
           <Row noGutters>
             <Col>
               <Container className="mt-5">
+                <Message />
                 <main>{children}</main>
               </Container>
             </Col>

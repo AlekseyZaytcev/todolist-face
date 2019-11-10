@@ -1,24 +1,30 @@
 import React from "react"
 import { connect } from "react-redux"
 import { setAuthToken } from "../../store/auth/actions"
+import {
+  setSuccessMessage,
+  setErrorMessage,
+} from "../../store/messages/actions"
 
 import Form from "./Form"
 
 class LoginContainer extends React.Component {
   render() {
     return (
-      <Form token={this.props.token} setAuthToken={this.props.setAuthToken} />
+      <Form
+        setAuthToken={this.props.setAuthToken}
+        setSuccessMessage={this.props.setSuccessMessage}
+        setErrorMessage={this.props.setErrorMessage}
+      />
     )
   }
 }
 
 const mapStateToProps = state => {
-  return {
-    token: state.auth.token,
-  }
+  return {}
 }
 
-const mapDispatchToProps = { setAuthToken }
+const mapDispatchToProps = { setAuthToken, setSuccessMessage, setErrorMessage }
 
 export default connect(
   mapStateToProps,

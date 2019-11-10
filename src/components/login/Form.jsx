@@ -26,6 +26,7 @@ class LoginForm extends React.Component {
 
         switch (response.status) {
           case 201:
+            this.props.setSuccessMessage("Logged in successfully!")
             navigate("/")
             break
           case 401:
@@ -35,7 +36,7 @@ class LoginForm extends React.Component {
             break
         }
       })
-      .catch(error => console.log(error))
+      .catch(error => this.props.setErrorMessage(error.message))
   }
 
   render() {
