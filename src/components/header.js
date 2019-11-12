@@ -8,6 +8,15 @@ import { destroyAuthToken } from "../store/auth/actions"
 import { Image } from "react-bootstrap"
 
 class Header extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleLogoutClick = this.handleLogoutClick.bind(this)
+  }
+
+  handleLogoutClick() {
+    this.props.destroyAuthToken()
+    navigate("/sign_in")
+  }
   render() {
     return (
       <header className="header__background_color">
@@ -23,7 +32,7 @@ class Header extends React.Component {
                   src="icons/logout.svg"
                   className="header__btn"
                   height="40"
-                  onClick={this.props.destroyAuthToken}
+                  onClick={this.handleLogoutClick}
                 />
               ) : (
                 <div>

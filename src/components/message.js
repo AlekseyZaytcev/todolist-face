@@ -13,7 +13,7 @@ class Message extends React.Component {
   componentWillMount() {
     this.clearTimer = setTimeout(() => {
       this.props.dismissAllMessage()
-    }, 4000)
+    }, 3000)
   }
 
   componentWillUnmount() {
