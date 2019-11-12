@@ -45,7 +45,7 @@ class LoginForm extends React.Component {
         <h3 className="form__element">Sign In</h3>
         {this.state.isInvalid && (
           <span className="form__error_message">
-            &#9888; Incorect login or(and) password
+            ! Incorect login or(and) password
           </span>
         )}
         <Form.Group className="form__element">
