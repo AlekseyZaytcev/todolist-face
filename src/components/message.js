@@ -11,9 +11,15 @@ import {
 
 class Message extends React.Component {
   componentWillMount() {
-    setTimeout(() => {
+    this.clearTimer = setTimeout(() => {
       this.props.dismissAllMessage()
     }, 4000)
+  }
+
+  componentWillUnmount() {
+    if (this.clearTimer) {
+      clearTimeout(this.clearTimer)
+    }
   }
 
   render() {

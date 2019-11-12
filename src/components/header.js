@@ -4,22 +4,10 @@ import PropTypes from "prop-types"
 import React from "react"
 import { connect } from "react-redux"
 import { destroyAuthToken } from "../store/auth/actions"
-import { setWarningMessage } from "../store/messages/actions"
 
 import { Image } from "react-bootstrap"
 
 class Header extends React.Component {
-  constructor(props) {
-    super(props)
-    this.handleSignOutClick = this.handleSignOutClick.bind(this)
-  }
-
-  handleSignOutClick() {
-    this.props.destroyAuthToken()
-    this.props.setWarningMessage("You are signed out!")
-    navigate("/sign_in")
-  }
-
   render() {
     return (
       <header className="header__background_color">
@@ -35,7 +23,7 @@ class Header extends React.Component {
                   src="icons/logout.svg"
                   className="header__btn"
                   height="40"
-                  onClick={this.handleSignOutClick}
+                  onClick={this.props.destroyAuthToken}
                 />
               ) : (
                 <div>
@@ -75,7 +63,7 @@ const mapStateToProps = state => {
   return { authToken: state.auth.token }
 }
 
-const mapDispatchToProps = { destroyAuthToken, setWarningMessage }
+const mapDispatchToProps = { destroyAuthToken }
 
 export default connect(
   mapStateToProps,
