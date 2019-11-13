@@ -8,12 +8,7 @@ import { destroyAuthToken } from "../store/auth/actions"
 import { Image } from "react-bootstrap"
 
 class Header extends React.Component {
-  constructor(props) {
-    super(props)
-    this.handleLogoutClick = this.handleLogoutClick.bind(this)
-  }
-
-  handleLogoutClick() {
+  handleLogoutClick = () => {
     this.props.destroyAuthToken()
     navigate("/sign_in")
   }

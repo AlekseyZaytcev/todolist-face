@@ -6,10 +6,9 @@ class LoginForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = { isInvalid: false }
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault()
     const data = new FormData(e.target)
 
