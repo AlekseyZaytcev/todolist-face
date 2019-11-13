@@ -1,5 +1,5 @@
 .form_wrapper {
-  width:  50%;
+  width: 50%;
   padding-top: 10%;
   display: block;
   margin-left: auto;
@@ -19,4 +19,12 @@
 .form__required:required:focus {
   border-color: $color-errors;
   box-shadow: 0 1px 1px $color-errors inset, 0 0 8px $color-errors;
+}
+
+.form__btn {
+  margin: 0.4em;
+}
+
+.form__controls {
+  margin-top: 0.8em;
 }

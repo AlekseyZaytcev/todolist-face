@@ -1,33 +1,32 @@
 import React from "react"
-import { InputGroup, FormControl } from "react-bootstrap"
+import { connect } from "react-redux"
+
+import { destroyAuthToken } from "../../store/auth/actions"
+import { setSuccessMessage, setErrorMessage } from "../../store/messages/actions"
+import ProjectForm from "./ProjectForm"
 
 class Todolist extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { projectNameInput: "" }
-    this.handleOnChange = this.handleOnChange.bind(this)
-  }
-
-  handleOnChange(e) {
-    this.setState({...this.state, projectNameInput: e.target.value})
-  }
-
   render() {
     return(
       <div>
         <h3 className="todo__title">Projects</h3>
-        <InputGroup size="lg">
-          <FormControl
-            aria-label="Large"
-            aria-describedby="inputGroup-sizing-sm"
-            placeholder="Enter Project Name ..."
-            value={this.state.projectNameInput}
-            onChange={this.handleOnChange}
-          />
-        </InputGroup>
+        <ProjectForm
+          authToken={this.props.authToken}
+          destroyAuthToken={this.props.destroyAuthToken}
+          setSuccessMessage={this.props.setSuccessMessage}
+          setErrorMessage={this.props.setErrorMessage}
+        />
       </div>
     )
   }
 }
+const mapStateToProps = state => {
+  return { authToken: state.auth.token }
+}
 
-export default Todolist
+const mapDispatchToProps = { destroyAuthToken, setSuccessMessage, setErrorMessage }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Todolist)
