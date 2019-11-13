@@ -13,6 +13,14 @@ class ReginstrationForm extends React.Component {
     e.preventDefault()
     const data = new FormData(e.target)
 
+    if (data.get("password") !== data.get("password_confirmation")) {
+      this.props.setErrorMessage("Passwords need to match!")
+      this.setState(state => {
+        return { ...state, isInvalid: true }
+      })
+      return
+    }
+
     fetch("https://todolist-endpoints.herokuapp.com/users", {
       method: "POST",
       body: JSON.stringify({ user: Object.fromEntries(data) }),
