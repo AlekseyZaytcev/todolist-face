@@ -1,6 +1,11 @@
 import React from "react"
+import { connect } from "react-redux"
 import { navigate } from "gatsby"
+
 import { InputGroup, FormControl, Button } from "react-bootstrap"
+
+import { destroyAuthToken } from "../../../store/auth/actions"
+import { setSuccessMessage, setErrorMessage } from "../../../store/messages/actions"
 
 class ProjectForm extends React.Component {
   constructor(props) {
@@ -48,24 +53,32 @@ class ProjectForm extends React.Component {
   render() {
     return(
       <>
-        <InputGroup size="lg">
-          <FormControl
-            aria-label="Large"
-            aria-describedby="inputGroup-sizing-sm"
-            placeholder="Enter Project Name ..."
-            value={this.state.projectNameInput}
-            onChange={this.handleOnChange}
-          />
-        </InputGroup>
-        {this.state.projectNameInput &&
-          <div className="form__controls">
-            <Button className="form__btn" size="lg" variant="primary" onClick={this.handleOnSubmit}>Create Project</Button>
-            <Button className="form__btn" size="lg" variant="secondary" onClick={this.handleOnCancel}>Cancel</Button>
-          </div>
-        }
+      <InputGroup size="lg">
+      <FormControl
+      aria-label="Large"
+      aria-describedby="inputGroup-sizing-sm"
+      placeholder="Enter Project Name ..."
+      value={this.state.projectNameInput}
+      onChange={this.handleOnChange}
+      />
+      </InputGroup>
+      {this.state.projectNameInput &&
+        <div className="form__controls">
+        <Button className="form__btn" size="lg" variant="primary" onClick={this.handleOnSubmit}>Create Project</Button>
+        <Button className="form__btn" size="lg" variant="secondary" onClick={this.handleOnCancel}>Cancel</Button>
+        </div>
+      }
       </>
     )
   }
 }
+const mapStateToProps = state => {
+  return { authToken: state.auth.token }
+}
 
-export default ProjectForm
+const mapDispatchToProps = { destroyAuthToken, setSuccessMessage, setErrorMessage }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProjectForm)

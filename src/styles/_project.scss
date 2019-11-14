@@ -1,0 +1,15 @@
+.project {
+  display: flex;
+  height: 2.5em;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.project:hover {
+  background-color: #f6f6f6;
+}
+
+.project__title {
+  margin-top: auto;
+  margin-bottom: auto;
+}
