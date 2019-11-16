@@ -6,7 +6,7 @@ import {
   setSuccessMessage,
   setErrorMessage,
 } from "../../../store/messages/actions"
-import { InlineForm } from "../InlineForm"
+import InlineForm from "../InlineForm"
 
 class ProjectForm extends React.Component {
   constructor(props) {
@@ -65,6 +65,7 @@ class ProjectForm extends React.Component {
     return (
       <InlineForm
         submitBtnName="Create Project"
+        hideControlsIfEmpty="true"
         inputValue={this.state.projectNameInput}
         handleOnChange={this.handleOnChange}
         handleOnSubmit={this.handleOnSubmit}
@@ -73,6 +74,7 @@ class ProjectForm extends React.Component {
     )
   }
 }
+
 const mapStateToProps = state => {
   return { authToken: state.auth.token }
 }

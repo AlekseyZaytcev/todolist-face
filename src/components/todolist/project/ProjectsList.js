@@ -8,7 +8,11 @@ import Project from "./Project"
 function List(props) {
   const projects = props.projects
   const list = projects.map(project => (
-    <Project key={project.id} project={project} />
+    <Project
+      key={project.id}
+      project={project}
+      deleteComponent={props.deleteProjectComponent}
+    />
   ))
 
   return <div>{list}</div>
@@ -20,6 +24,18 @@ class ProjectsList extends React.Component {
     this.state = {
       projects: [],
     }
+  }
+
+  deleteProjectComponent = id => {
+    let filterProjects = id => {
+      return function(e) {
+        return e.id !== id
+      }
+    }
+
+    this.setState({
+      projects: this.state.projects.filter(filterProjects(id)),
+    })
   }
 
   componentWillMount() {
@@ -50,7 +66,12 @@ class ProjectsList extends React.Component {
   }
 
   render() {
-    return <List projects={this.state.projects} />
+    return (
+      <List
+        projects={this.state.projects}
+        deleteProjectComponent={this.deleteProjectComponent}
+      />
+    )
   }
 }
 

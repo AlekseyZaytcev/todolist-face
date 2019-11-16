@@ -12,7 +12,7 @@ import {
   faPencilAlt,
   faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons"
-import { InlineForm } from "../InlineForm"
+import InlineForm from "../InlineForm"
 
 class Project extends React.Component {
   constructor(props) {
@@ -23,10 +23,6 @@ class Project extends React.Component {
       projectNameInput: "",
       projectEditorIsOpen: false,
     }
-  }
-
-  handleOnTrash() {
-    alert("Ololo")
   }
 
   handleOnEdit = () => {
@@ -69,6 +65,40 @@ class Project extends React.Component {
               name: this.state.projectNameInput,
               projectEditorIsOpen: false,
             })
+            break
+          case 401:
+            this.props.destroyAuthToken()
+            this.props.setErrorMessage(
+              "You are not authorized to perform this action."
+            )
+            navigate("/sign_in")
+            break
+          default:
+        }
+      })
+      .catch(error => this.props.setErrorMessage(error.message))
+  }
+
+  handleOnTrash = e => {
+    e.preventDefault()
+    fetch(
+      `https://todolist-endpoints.herokuapp.com/projects/${this.state.id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Accept": "application/json",
+          "Authorization": this.props.authToken,
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then(response => {
+        switch (response.status) {
+          case 200:
+            this.props.setSuccessMessage(
+              `Project "${this.state.name}" successfully deleted!`
+            )
+            this.props.deleteComponent(this.state.id)
             break
           case 401:
             this.props.destroyAuthToken()
