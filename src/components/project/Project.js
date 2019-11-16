@@ -1,18 +1,18 @@
 import React from "react"
 import { connect } from "react-redux"
 import { navigate } from "gatsby"
-import { destroyAuthToken } from "../../../store/auth/actions"
+import { destroyAuthToken } from "../../store/auth/actions"
 import {
   setSuccessMessage,
   setErrorMessage,
-} from "../../../store/messages/actions"
+} from "../../store/messages/actions"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faCaretRight,
   faPencilAlt,
   faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons"
-import InlineForm from "../InlineForm"
+import InlineForm from "./InlineForm"
 
 class Project extends React.Component {
   constructor(props) {

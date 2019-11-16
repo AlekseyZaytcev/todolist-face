@@ -1,9 +1,10 @@
 import React from "react"
 import { navigate } from "gatsby"
 import { connect } from "react-redux"
-import { destroyAuthToken } from "../../../store/auth/actions"
-import { setErrorMessage } from "../../../store/messages/actions"
+import { destroyAuthToken } from "../../store/auth/actions"
+import { setErrorMessage } from "../../store/messages/actions"
 import Project from "./Project"
+import ProjectForm from "./ProjectForm"
 
 function List(props) {
   const projects = props.projects
@@ -24,6 +25,10 @@ class ProjectsList extends React.Component {
     this.state = {
       projects: [],
     }
+  }
+
+  addProjectComponent = project => {
+    this.setState({ projects: this.state.projects.concat([project]) })
   }
 
   deleteProjectComponent = id => {
@@ -67,10 +72,14 @@ class ProjectsList extends React.Component {
 
   render() {
     return (
-      <List
-        projects={this.state.projects}
-        deleteProjectComponent={this.deleteProjectComponent}
-      />
+      <div>
+        <h3 className="todo__title">Projects</h3>
+        <List
+          projects={this.state.projects}
+          deleteProjectComponent={this.deleteProjectComponent}
+        />
+        <ProjectForm addProjectComponent={this.addProjectComponent} />
+      </div>
     )
   }
 }

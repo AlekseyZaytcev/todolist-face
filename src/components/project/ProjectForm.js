@@ -1,12 +1,12 @@
 import React from "react"
 import { connect } from "react-redux"
 import { navigate } from "gatsby"
-import { destroyAuthToken } from "../../../store/auth/actions"
+import { destroyAuthToken } from "../../store/auth/actions"
 import {
   setSuccessMessage,
   setErrorMessage,
-} from "../../../store/messages/actions"
-import InlineForm from "../InlineForm"
+} from "../../store/messages/actions"
+import InlineForm from "./InlineForm"
 
 class ProjectForm extends React.Component {
   constructor(props) {
@@ -38,6 +38,9 @@ class ProjectForm extends React.Component {
       .then(response => {
         switch (response.status) {
           case 201:
+            response
+              .json()
+              .then(json => this.props.addProjectComponent(json.data))
             this.props.setSuccessMessage(
               `Project "${this.state.projectNameInput}" successfully created!`
             )
