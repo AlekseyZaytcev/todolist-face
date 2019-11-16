@@ -63,14 +63,16 @@ class ProjectForm extends React.Component {
 
   render() {
     return (
-      <InlineForm
-        submitBtnName="Create Project"
-        hideControlsIfEmpty="true"
-        inputValue={this.state.projectNameInput}
-        handleOnChange={this.handleOnChange}
-        handleOnSubmit={this.handleOnSubmit}
-        handleOnCancel={this.handleOnCancel}
-      />
+      <div className="project__new-form">
+        <InlineForm
+          submitBtnName="Create Project"
+          hideControlsIfEmpty="true"
+          inputValue={this.state.projectNameInput}
+          handleOnChange={this.handleOnChange}
+          handleOnSubmit={this.handleOnSubmit}
+          handleOnCancel={this.handleOnCancel}
+        />
+      </div>
     )
   }
 }
