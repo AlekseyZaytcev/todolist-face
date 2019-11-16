@@ -8,7 +8,7 @@ class ReginstrationForm extends React.Component {
     this.state = { isInvalid: false }
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault()
     const data = new FormData(e.target)
 
@@ -29,13 +29,15 @@ class ReginstrationForm extends React.Component {
       },
     })
       .then(response => {
-        switch(response.status) {
+        switch (response.status) {
           case 201:
             this.props.setSuccessMessage("You are successfully registered!")
             navigate("/sign_in")
             break
           case 422:
-            response.json().then((data) => this.props.setErrorMessage(data.errors.join(". ")))
+            response
+              .json()
+              .then(data => this.props.setErrorMessage(data.errors.join(". ")))
             this.setState(state => {
               return { ...state, isInvalid: true }
             })
@@ -61,42 +63,43 @@ class ReginstrationForm extends React.Component {
             name="username"
             placeholder="User Name"
             isInvalid={this.state.isInvalid}
-            required />
-          </Form.Group>
+            required
+          />
+        </Form.Group>
 
-          <Form.Group>
-            <Form.Control
-              size="lg"
-              className="form__required"
-              name="password"
-              type="password"
-              placeholder="Password"
-              isInvalid={this.state.isInvalid}
-              required
-            />
-          </Form.Group>
-
-          <Form.Group>
-            <Form.Control
-              size="lg"
-              className="form__required"
-              name="password_confirmation"
-              type="password"
-              placeholder="Confirm Password"
-              isInvalid={this.state.isInvalid}
-              required
-            />
-          </Form.Group>
-
-          <Button
+        <Form.Group>
+          <Form.Control
             size="lg"
-            className="form__element"
-            variant="primary"
-            type="submit"
-          >
-            Sign Up
-          </Button>
-        </Form>
+            className="form__required"
+            name="password"
+            type="password"
+            placeholder="Password"
+            isInvalid={this.state.isInvalid}
+            required
+          />
+        </Form.Group>
+
+        <Form.Group>
+          <Form.Control
+            size="lg"
+            className="form__required"
+            name="password_confirmation"
+            type="password"
+            placeholder="Confirm Password"
+            isInvalid={this.state.isInvalid}
+            required
+          />
+        </Form.Group>
+
+        <Button
+          size="lg"
+          className="form__element"
+          variant="primary"
+          type="submit"
+        >
+          Sign Up
+        </Button>
+      </Form>
     )
   }
 }

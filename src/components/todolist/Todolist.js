@@ -5,11 +5,11 @@ import ProjectsList from "./project/ProjectsList"
 
 class Todolist extends React.Component {
   render() {
-    return(
+    return (
       <div>
-      <h3 className="todo__title">Projects</h3>
-      <ProjectsList />
-      <ProjectForm />
+        <h3 className="todo__title">Projects</h3>
+        <ProjectsList />
+        <ProjectForm />
       </div>
     )
   }

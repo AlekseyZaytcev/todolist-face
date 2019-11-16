@@ -8,7 +8,7 @@ class LoginForm extends React.Component {
     this.state = { isInvalid: false }
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault()
     const data = new FormData(e.target)
 
@@ -16,7 +16,7 @@ class LoginForm extends React.Component {
       method: "POST",
       body: JSON.stringify({ user: Object.fromEntries(data) }),
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Content-Type": "application/json",
       },
     })

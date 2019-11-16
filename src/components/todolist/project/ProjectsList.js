@@ -9,16 +9,18 @@ import Project from "./Project"
 
 function List(props) {
   const projects = props.projects
-  const list = projects.map((project) => <Project key={project.id} project={project}/>)
+  const list = projects.map(project => (
+    <Project key={project.id} project={project} />
+  ))
 
-  return (<div>{list}</div>)
+  return <div>{list}</div>
 }
 
 class ProjectsList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      projects: []
+      projects: [],
     }
   }
 
@@ -34,11 +36,13 @@ class ProjectsList extends React.Component {
       .then(response => {
         switch (response.status) {
           case 200:
-            response.json().then((json) => this.setState({ projects: json.data }))
+            response.json().then(json => this.setState({ projects: json.data }))
             break
           case 401:
             this.props.destroyAuthToken()
-            this.props.setErrorMessage("You are not authorized to perform this action.")
+            this.props.setErrorMessage(
+              "You are not authorized to perform this action."
+            )
             navigate("/sign_in")
             break
         }
@@ -46,11 +50,8 @@ class ProjectsList extends React.Component {
       .catch(error => this.props.setErrorMessage(error.message))
   }
 
-
   render() {
-    return(
-      <List projects={this.state.projects} />
-    )
+    return <List projects={this.state.projects} />
   }
 }
 
