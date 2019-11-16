@@ -22,7 +22,6 @@ class ProjectForm extends React.Component {
   }
   handleOnSubmit = e => {
     e.preventDefault()
-
     const payload = {
       project: { name: this.state.projectNameInput },
     }
