@@ -1,12 +1,11 @@
 import React from "react"
-
-import { InputGroup, FormControl, Button } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faCaretRight,
   faPencilAlt,
   faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons"
+import { InlineForm } from "../InlineForm"
 
 class Project extends React.Component {
   constructor(props) {
@@ -15,7 +14,7 @@ class Project extends React.Component {
       id: this.props.project.id,
       name: this.props.project.attributes.name,
       projectNameInput: "",
-      projectInputOpen: false,
+      projectEditorIsOpen: false,
     }
   }
 
@@ -24,11 +23,14 @@ class Project extends React.Component {
   }
 
   handleOnEdit = () => {
-    this.setState({ projectNameInput: this.state.name, projectInputOpen: true })
+    this.setState({
+      projectNameInput: this.state.name,
+      projectEditorIsOpen: true,
+    })
   }
 
   handleOnCancel = () => {
-    this.setState({ projectNameInput: "", projectInputOpen: false })
+    this.setState({ projectNameInput: "", projectEditorIsOpen: false })
   }
   handleOnChange = e => {
     this.setState({ projectNameInput: e.target.value })
@@ -38,36 +40,14 @@ class Project extends React.Component {
   render() {
     return (
       <>
-        {this.state.projectInputOpen ? (
-          <>
-            <InputGroup size="lg">
-              <FormControl
-                aria-label="Large"
-                aria-describedby="inputGroup-sizing-sm"
-                placeholder="Enter Project Name ..."
-                value={this.state.projectNameInput}
-                onChange={this.handleOnChange}
-              />
-            </InputGroup>
-            <div className="form__controls">
-              <Button
-                className="form__btn"
-                size="lg"
-                variant="primary"
-                onClick={this.handleOnSave}
-              >
-                Save
-              </Button>
-              <Button
-                className="form__btn"
-                size="lg"
-                variant="secondary"
-                onClick={this.handleOnCancel}
-              >
-                Cancel
-              </Button>
-            </div>
-          </>
+        {this.state.projectEditorIsOpen ? (
+          <InlineForm
+            submitBtnName="Save"
+            inputValue={this.state.projectNameInput}
+            handleOnChange={this.handleOnChange}
+            handleOnSubmit={this.handleOnSave}
+            handleOnCancel={this.handleOnCancel}
+          />
         ) : (
           <div className="form-control form__element project">
             <div className="project__title">
@@ -78,7 +58,7 @@ class Project extends React.Component {
               <span className="project__element">{this.state.name}</span>
             </div>
 
-            <div class="project__controls">
+            <div className="project__controls">
               <FontAwesomeIcon
                 icon={faPencilAlt}
                 className="project__element"

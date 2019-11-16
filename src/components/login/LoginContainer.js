@@ -5,7 +5,6 @@ import {
   setSuccessMessage,
   setErrorMessage,
 } from "../../store/messages/actions"
-
 import Form from "./Form"
 
 class LoginContainer extends React.Component {

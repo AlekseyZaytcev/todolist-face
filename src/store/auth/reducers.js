@@ -10,6 +10,7 @@ export const authReducer = (state = defaultState, action) => {
       return { ...state, token: action.payload }
     case DESTROY_AUTH_TOKEN:
       return { ...state, token: action.payload }
+    default:
   }
 
   return state

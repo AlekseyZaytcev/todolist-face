@@ -4,7 +4,6 @@ import PropTypes from "prop-types"
 import React from "react"
 import { connect } from "react-redux"
 import { destroyAuthToken } from "../store/auth/actions"
-
 import { Image } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons"

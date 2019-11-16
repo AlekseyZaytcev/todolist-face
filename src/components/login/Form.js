@@ -33,6 +33,7 @@ class LoginForm extends React.Component {
               return { ...state, isInvalid: true }
             })
             break
+          default:
         }
       })
       .catch(error => this.props.setErrorMessage(error.message))

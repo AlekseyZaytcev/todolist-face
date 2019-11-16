@@ -35,6 +35,7 @@ export const messageReducer = (state = defaultState, action) => {
         warningMessage: action.payload,
         errorMessage: action.payload,
       }
+    default:
   }
 
   return state

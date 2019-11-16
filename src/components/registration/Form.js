@@ -42,6 +42,7 @@ class ReginstrationForm extends React.Component {
               return { ...state, isInvalid: true }
             })
             break
+          default:
         }
       })
       .catch(error => console.log(error))

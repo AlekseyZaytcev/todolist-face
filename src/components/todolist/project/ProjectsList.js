@@ -1,10 +1,8 @@
 import React from "react"
 import { navigate } from "gatsby"
 import { connect } from "react-redux"
-
 import { destroyAuthToken } from "../../../store/auth/actions"
 import { setErrorMessage } from "../../../store/messages/actions"
-
 import Project from "./Project"
 
 function List(props) {
@@ -45,6 +43,7 @@ class ProjectsList extends React.Component {
             )
             navigate("/sign_in")
             break
+          default:
         }
       })
       .catch(error => this.props.setErrorMessage(error.message))

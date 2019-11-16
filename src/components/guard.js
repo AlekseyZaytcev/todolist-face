@@ -1,7 +1,6 @@
 import React from "react"
 import { navigate } from "gatsby"
 import { connect } from "react-redux"
-
 import { setErrorMessage } from "../store/messages/actions"
 
 class Guard extends React.Component {
