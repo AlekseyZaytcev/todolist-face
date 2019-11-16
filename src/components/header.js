@@ -6,6 +6,8 @@ import { connect } from "react-redux"
 import { destroyAuthToken } from "../store/auth/actions"
 
 import { Image } from "react-bootstrap"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons"
 
 class Header extends React.Component {
   handleLogoutClick = () => {
@@ -23,10 +25,9 @@ class Header extends React.Component {
             </h1>
             <div className="header__control_buttons">
               {this.props.authToken ? (
-                <Image
-                  src="icons/logout.svg"
-                  className="header__btn"
-                  height="40"
+                <FontAwesomeIcon
+                  icon={faSignOutAlt}
+                  className="header__btn header__sign-out"
                   onClick={this.handleLogoutClick}
                 />
               ) : (

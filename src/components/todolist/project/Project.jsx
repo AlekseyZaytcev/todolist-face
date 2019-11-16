@@ -1,5 +1,8 @@
 import React from "react"
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCaretRight, faPencilAlt, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
+
 class Project extends React.Component {
   constructor(props) {
     super(props)
@@ -12,7 +15,24 @@ class Project extends React.Component {
   render() {
     return(
       <div className="form-control form__element project">
-      <span className="project__title">{this.state.name}</span>
+      <div className="project__title">
+      <FontAwesomeIcon
+      icon={faCaretRight}
+      className="project__element"
+      />
+      <span className="project__element">{this.state.name}</span>
+      </div>
+
+      <div class="project__controls">
+      <FontAwesomeIcon
+      icon={faPencilAlt}
+      className="project__element"
+      />
+      <FontAwesomeIcon
+      icon={faTrashAlt}
+      className="project__element"
+      />
+      </div>
       </div>
     )
   }
