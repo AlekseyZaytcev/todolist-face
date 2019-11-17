@@ -9,6 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faCaretRight,
+  faCaretDown,
   faPencilAlt,
   faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons"
@@ -81,7 +82,7 @@ class Project extends React.Component {
   }
 
   handleOnTrash = e => {
-    e.preventDefault()
+    e.stopPropagation()
     fetch(
       `https://todolist-endpoints.herokuapp.com/projects/${this.state.id}`,
       {
@@ -114,6 +115,19 @@ class Project extends React.Component {
       .catch(error => this.props.setErrorMessage(error.message))
   }
 
+  handleTitleClick = e => {
+    e.stopPropagation()
+    const project = e.target.closest(".project")
+    const projectTasks = project.parentNode.querySelector(".tasks-list")
+    const caretRight = project.querySelector(".fa-caret-right")
+    const caretDown = project.querySelector(".fa-caret-down")
+
+    project.classList.toggle("project__expanded")
+    projectTasks.classList.toggle("hidden")
+    caretRight.classList.toggle("hidden")
+    caretDown.classList.toggle("hidden")
+  }
+
   render() {
     return (
       <>
@@ -126,30 +140,39 @@ class Project extends React.Component {
             handleOnCancel={this.handleOnCancel}
           />
         ) : (
-          <div className="form-control form__element project">
-            <div className="project__title">
-              <FontAwesomeIcon
-                icon={faCaretRight}
-                className="project__element"
-              />
-              <span className="project__element">{this.state.name}</span>
-            </div>
+          <div>
+            <div
+              className="form-control form__element project"
+              onClick={this.handleTitleClick}
+            >
+              <div className="project__title">
+                <FontAwesomeIcon
+                  icon={faCaretRight}
+                  className="project__element"
+                />
+                <FontAwesomeIcon
+                  icon={faCaretDown}
+                  className="project__element hidden"
+                />
+                <span className="project__element">{this.state.name}</span>
+              </div>
 
-            <div className="project__controls">
-              <FontAwesomeIcon
-                icon={faPencilAlt}
-                className="project__element"
-                onClick={this.handleOnEdit}
-              />
-              <FontAwesomeIcon
-                icon={faTrashAlt}
-                className="project__element"
-                onClick={this.handleOnTrash}
-              />
+              <div className="project__controls">
+                <FontAwesomeIcon
+                  icon={faPencilAlt}
+                  className="project__element"
+                  onClick={this.handleOnEdit}
+                />
+                <FontAwesomeIcon
+                  icon={faTrashAlt}
+                  className="project__element"
+                  onClick={this.handleOnTrash}
+                />
+              </div>
             </div>
+            <TasksList projectId={this.state.id} />
           </div>
         )}
-        <TasksList projectId={this.state.id} />
       </>
     )
   }

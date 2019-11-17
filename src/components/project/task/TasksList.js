@@ -76,7 +76,7 @@ class TasksList extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="tasks-list hidden">
         <List
           projectId={this.props.projectId}
           tasks={this.state.tasks}

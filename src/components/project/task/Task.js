@@ -7,11 +7,8 @@ import {
   setErrorMessage,
 } from "../../../store/messages/actions"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {
-  faCaretRight,
-  faPencilAlt,
-  faTrashAlt,
-} from "@fortawesome/free-solid-svg-icons"
+import { faPencilAlt, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
+import { faSquare } from "@fortawesome/free-regular-svg-icons"
 import InlineForm from "./InlineForm"
 
 class Task extends React.Component {
@@ -125,9 +122,9 @@ class Task extends React.Component {
             handleOnCancel={this.handleOnCancel}
           />
         ) : (
-          <div className="form-control form__element task">
+          <div className="task">
             <div className="task__title">
-              <FontAwesomeIcon icon={faCaretRight} className="task__element" />
+              <FontAwesomeIcon icon={faSquare} className="task__element" />
               <span className="task__element">{this.state.name}</span>
             </div>
 

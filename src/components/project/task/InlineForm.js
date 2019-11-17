@@ -13,7 +13,7 @@ class InlineForm extends React.Component {
           <FormControl
             aria-label="Large"
             aria-describedby="inputGroup-sizing-sm"
-            placeholder="Enter Project Name ..."
+            placeholder="Enter Task Name ..."
             value={this.props.inputValue}
             onChange={this.props.handleOnChange}
           />
@@ -23,16 +23,16 @@ class InlineForm extends React.Component {
           <div className="form__controls">
             <Button
               className="form__btn"
-              size="lg"
-              variant="primary"
+              size="sm"
+              variant="success"
               onClick={this.props.handleOnSubmit}
             >
               {this.props.submitBtnName}
             </Button>
             <Button
               className="form__btn"
-              size="lg"
-              variant="secondary"
+              size="sm"
+              variant="light"
               onClick={this.props.handleOnCancel}
             >
               Cancel

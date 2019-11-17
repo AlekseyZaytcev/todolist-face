@@ -23,7 +23,6 @@ class InlineForm extends React.Component {
           <div className="form__controls">
             <Button
               className="form__btn"
-              size="lg"
               variant="primary"
               onClick={this.props.handleOnSubmit}
             >
@@ -31,7 +30,6 @@ class InlineForm extends React.Component {
             </Button>
             <Button
               className="form__btn"
-              size="lg"
               variant="secondary"
               onClick={this.props.handleOnCancel}
             >

@@ -39,7 +39,6 @@ class TaskForm extends React.Component {
       }
     )
       .then(response => {
-        console.log(response)
         switch (response.status) {
           case 201:
             response.json().then(json => this.props.addTaskComponent(json.data))
