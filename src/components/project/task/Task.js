@@ -1,11 +1,11 @@
 import React from "react"
 import { connect } from "react-redux"
 import { navigate } from "gatsby"
-import { destroyAuthToken } from "../../store/auth/actions"
+import { destroyAuthToken } from "../../../store/auth/actions"
 import {
   setSuccessMessage,
   setErrorMessage,
-} from "../../store/messages/actions"
+} from "../../../store/messages/actions"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faCaretRight,
@@ -13,39 +13,38 @@ import {
   faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons"
 import InlineForm from "./InlineForm"
-import TasksList from "./task/TasksList"
 
-class Project extends React.Component {
+class Task extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      id: this.props.project.id,
-      name: this.props.project.attributes.name,
-      projectNameInput: "",
-      projectEditorIsOpen: false,
+      id: this.props.task.id,
+      name: this.props.task.attributes.name,
+      taskNameInput: "",
+      taskEditorIsOpen: false,
     }
   }
 
   handleOnEdit = () => {
     this.setState({
-      projectNameInput: this.state.name,
-      projectEditorIsOpen: true,
+      taskNameInput: this.state.name,
+      taskEditorIsOpen: true,
     })
   }
 
   handleOnCancel = () => {
-    this.setState({ projectNameInput: "", projectEditorIsOpen: false })
+    this.setState({ taskNameInput: "", taskEditorIsOpen: false })
   }
   handleOnChange = e => {
-    this.setState({ projectNameInput: e.target.value })
+    this.setState({ taskNameInput: e.target.value })
   }
   handleOnSave = e => {
     e.preventDefault()
     const payload = {
-      project: { name: this.state.projectNameInput },
+      task: { name: this.state.taskNameInput },
     }
     fetch(
-      `https://todolist-endpoints.herokuapp.com/projects/${this.state.id}`,
+      `https://todolist-endpoints.herokuapp.com/projects/${this.props.projectId}/tasks/${this.state.id}`,
       {
         method: "PATCH",
         body: JSON.stringify(payload),
@@ -60,11 +59,11 @@ class Project extends React.Component {
         switch (response.status) {
           case 200:
             this.props.setSuccessMessage(
-              `Project "${this.state.name}" successfully updated!`
+              `Task "${this.state.name}" successfully updated!`
             )
             this.setState({
-              name: this.state.projectNameInput,
-              projectEditorIsOpen: false,
+              name: this.state.taskNameInput,
+              taskEditorIsOpen: false,
             })
             break
           case 401:
@@ -83,7 +82,7 @@ class Project extends React.Component {
   handleOnTrash = e => {
     e.preventDefault()
     fetch(
-      `https://todolist-endpoints.herokuapp.com/projects/${this.state.id}`,
+      `https://todolist-endpoints.herokuapp.com/projects/${this.props.projectId}/tasks/${this.state.id}`,
       {
         method: "DELETE",
         headers: {
@@ -97,7 +96,7 @@ class Project extends React.Component {
         switch (response.status) {
           case 200:
             this.props.setSuccessMessage(
-              `Project "${this.state.name}" successfully deleted!`
+              `Task "${this.state.name}" successfully deleted!`
             )
             this.props.deleteComponent(this.state.id)
             break
@@ -117,39 +116,35 @@ class Project extends React.Component {
   render() {
     return (
       <>
-        {this.state.projectEditorIsOpen ? (
+        {this.state.taskEditorIsOpen ? (
           <InlineForm
             submitBtnName="Save"
-            inputValue={this.state.projectNameInput}
+            inputValue={this.state.taskNameInput}
             handleOnChange={this.handleOnChange}
             handleOnSubmit={this.handleOnSave}
             handleOnCancel={this.handleOnCancel}
           />
         ) : (
-          <div className="form-control form__element project">
-            <div className="project__title">
-              <FontAwesomeIcon
-                icon={faCaretRight}
-                className="project__element"
-              />
-              <span className="project__element">{this.state.name}</span>
+          <div className="form-control form__element task">
+            <div className="task__title">
+              <FontAwesomeIcon icon={faCaretRight} className="task__element" />
+              <span className="task__element">{this.state.name}</span>
             </div>
 
-            <div className="project__controls">
+            <div className="task__controls">
               <FontAwesomeIcon
                 icon={faPencilAlt}
-                className="project__element"
+                className="task__element"
                 onClick={this.handleOnEdit}
               />
               <FontAwesomeIcon
                 icon={faTrashAlt}
-                className="project__element"
+                className="task__element"
                 onClick={this.handleOnTrash}
               />
             </div>
           </div>
         )}
-        <TasksList projectId={this.state.id} />
       </>
     )
   }
@@ -168,4 +163,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Project)
+)(Task)
