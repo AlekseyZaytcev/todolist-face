@@ -1,6 +1,8 @@
 import { navigate } from "gatsby"
 import React from "react"
 import { Form, Button } from "react-bootstrap"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons"
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -45,7 +47,8 @@ class LoginForm extends React.Component {
         <h3 className="form__element">Sign In</h3>
         {this.state.isInvalid && (
           <span className="form__error_message">
-            ! Incorect login or(and) password
+            <FontAwesomeIcon icon={faExclamationTriangle} /> Incorect login
+            or(and) password
           </span>
         )}
         <Form.Group className="form__element">
