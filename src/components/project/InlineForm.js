@@ -1,5 +1,5 @@
 import React from "react"
-import { InputGroup, FormControl, Button } from "react-bootstrap"
+import { Form, InputGroup, FormControl, Button } from "react-bootstrap"
 
 class InlineForm extends React.Component {
   toggleControls = () => {
@@ -8,7 +8,7 @@ class InlineForm extends React.Component {
 
   render() {
     return (
-      <>
+      <Form onSubmit={this.props.handleOnSubmit}>
         <InputGroup size="lg">
           <FormControl
             aria-label="Large"
@@ -21,11 +21,7 @@ class InlineForm extends React.Component {
 
         {this.toggleControls() && (
           <div className="form__controls">
-            <Button
-              className="form__btn"
-              variant="primary"
-              onClick={this.props.handleOnSubmit}
-            >
+            <Button className="form__btn" variant="primary" type="submit">
               {this.props.submitBtnName}
             </Button>
             <Button
@@ -37,7 +33,7 @@ class InlineForm extends React.Component {
             </Button>
           </div>
         )}
-      </>
+      </Form>
     )
   }
 }
