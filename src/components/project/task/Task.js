@@ -174,7 +174,9 @@ class Task extends React.Component {
               )}
               <span
                 className={
-                  this.state.completed ? "task__completed" : "task__element"
+                  this.state.completed
+                    ? "task__completed"
+                    : "task__not-completed"
                 }
               >
                 {this.state.name}

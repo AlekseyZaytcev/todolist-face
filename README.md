@@ -1,6 +1,6 @@
 # TODO-List Face
 
-This is front-end application for [TODO-List API](https://github.com/AlekseyZaytcev/todo-list-api)
+This is front-end application for [TODO-List API](https://github.com/AlekseyZaytcev/todo-list-api). Site available on [GithubPages](https://alekseyzaytcev.github.io/todolist-face/index).
 
 ## Getting Started
 
