@@ -8,7 +8,7 @@ import {
 } from "../../../store/messages/actions"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPencilAlt, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
-import { faSquare } from "@fortawesome/free-regular-svg-icons"
+import { faSquare, faCheckSquare } from "@fortawesome/free-regular-svg-icons"
 import InlineForm from "./InlineForm"
 
 class Task extends React.Component {
@@ -17,12 +17,14 @@ class Task extends React.Component {
     this.state = {
       id: this.props.task.id,
       name: this.props.task.attributes.name,
+      completed: this.props.task.attributes.completed,
       taskNameInput: "",
       taskEditorIsOpen: false,
     }
   }
 
   handleOnEdit = () => {
+    console.log(this.state)
     this.setState({
       taskNameInput: this.state.name,
       taskEditorIsOpen: true,
@@ -110,6 +112,40 @@ class Task extends React.Component {
       .catch(error => this.props.setErrorMessage(error.message))
   }
 
+  completeTask = e => {
+    e.preventDefault()
+    fetch(
+      `https://todolist-endpoints.herokuapp.com/tasks/${this.state.id}/complete`,
+      {
+        method: "PATCH",
+        headers: {
+          "Accept": "application/json",
+          "Authorization": this.props.authToken,
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then(response => {
+        switch (response.status) {
+          case 200:
+            this.setState({ completed: true })
+            this.props.setSuccessMessage(
+              `Task "${this.state.name}" successfully completed!`
+            )
+            break
+          case 401:
+            this.props.destroyAuthToken()
+            this.props.setErrorMessage(
+              "You are not authorized to perform this action."
+            )
+            navigate("/sign_in")
+            break
+          default:
+        }
+      })
+      .catch(error => this.props.setErrorMessage(error.message))
+  }
+
   render() {
     return (
       <>
@@ -124,8 +160,25 @@ class Task extends React.Component {
         ) : (
           <div className="task">
             <div className="task__title">
-              <FontAwesomeIcon icon={faSquare} className="task__element" />
-              <span className="task__element">{this.state.name}</span>
+              {this.state.completed ? (
+                <FontAwesomeIcon
+                  icon={faCheckSquare}
+                  className="task__element"
+                />
+              ) : (
+                <FontAwesomeIcon
+                  icon={faSquare}
+                  className="task__element"
+                  onClick={this.completeTask}
+                />
+              )}
+              <span
+                className={
+                  this.state.completed ? "task__completed" : "task__element"
+                }
+              >
+                {this.state.name}
+              </span>
             </div>
 
             <div className="task__controls">

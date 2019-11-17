@@ -33,6 +33,14 @@
   cursor: pointer;
 }
 
+.task__completed {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 0.6em;
+  color: #595959;
+  text-decoration: line-through;
+}
+
 .task__title {
   width: auto;
   display: flex;
